@@ -50,6 +50,46 @@ request id.
 - [`observability/references/deploy-and-access.md`](observability/references/deploy-and-access.md):
   single-host deploy, secrets and IAM, the private-access model, and adaptation.
 
+### multi-tenant
+
+Keeping one tenant's data out of another tenant's view in a shared-database SaaS,
+distilled from a system that shipped a real cross-persona leak and then closed it.
+
+The active tenant is resolved only from an explicit request header, verified
+against membership, and never guessed. The data boundary is the queryset filter,
+not the permission class. Postgres row-level security is the defense-in-depth
+backstop. Plus the frontend org context, the tenant-id and object lockstep, and
+the cross-user cache wipe for shared browsers.
+
+- [`multi-tenant/SKILL.md`](multi-tenant/SKILL.md): the four-layer model, the one
+  rule that prevents the bug class, do's and don'ts, and the non-negotiables.
+- [`multi-tenant/references/backend.md`](multi-tenant/references/backend.md):
+  resolution, queryset scoping, permission classes, and row-level security done
+  right.
+- [`multi-tenant/references/frontend.md`](multi-tenant/references/frontend.md):
+  the org context, the lockstep invariant, and the cross-user wipe.
+
+### infra
+
+Production AWS infrastructure with Terraform and GitHub Actions, proven on a
+Django and ECS system through a full cost-saving teardown and rebuild.
+
+The environment-and-module layout, the reversible feature-toggle pattern, S3
+state with native locking, OIDC for CI auth with no static keys, the
+plan-before-apply discipline, the safe ECS deploy ordering, least-privilege IAM,
+the security posture behind a load balancer, secrets through SSM, and the
+private-by-default access model. With explicit do's and don'ts and the gotchas
+that bit in production.
+
+- [`infra/SKILL.md`](infra/SKILL.md): the principles, the layered model, build
+  order, and a full do and don't list.
+- [`infra/references/terraform.md`](infra/references/terraform.md): structure, the
+  reversible toggle pattern, state, and the plan-before-apply discipline.
+- [`infra/references/cicd-deploy.md`](infra/references/cicd-deploy.md): OIDC, the
+  approval gate, the infra-to-app handoff, and the safe ECS deploy ordering.
+- [`infra/references/security-secrets-access.md`](infra/references/security-secrets-access.md):
+  secrets, least-privilege IAM, the load-balancer posture, and private access.
+
 ## Using a skill
 
 Copy or symlink a skill directory into `~/.claude/skills/` (global) or a project's
