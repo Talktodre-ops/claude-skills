@@ -26,6 +26,30 @@ TLS-terminating proxy.
   the ship checklist, the known gaps to fix, and how to adapt the blueprint to a
   single-tenant app, a mobile API, RS256, or TOTP 2FA.
 
+### observability
+
+A self-hosted, open-source observability stack and how to wire an app into it,
+distilled from a real Django and ECS deployment.
+
+Prometheus for metrics, Loki (with an S3 object store) for logs, Grafana as the
+single query pane, Grafana Alloy for log collection and Faro browser RUM, and
+GlitchTip (Sentry-API-compatible) for errors, on one Docker Compose host,
+provisioned as code. App integration covers FireLens dual-write logs, Prometheus
+scraping with service discovery, Faro RUM through a same-origin proxy, and the
+Sentry SDK to GlitchTip, joined by a shared low-cardinality label taxonomy and a
+request id.
+
+- [`observability/SKILL.md`](observability/SKILL.md): the entry point. The four
+  signals, the tool wiring, design decisions, and the non-negotiables.
+- [`observability/references/stack-and-compose.md`](observability/references/stack-and-compose.md):
+  the components, version pinning, and the Docker Compose and per-tool config.
+- [`observability/references/instrumentation.md`](observability/references/instrumentation.md):
+  how the app emits logs, metrics, browser RUM, and errors.
+- [`observability/references/grafana-as-code.md`](observability/references/grafana-as-code.md):
+  datasources, dashboards, and alerting provisioned from files.
+- [`observability/references/deploy-and-access.md`](observability/references/deploy-and-access.md):
+  single-host deploy, secrets and IAM, the private-access model, and adaptation.
+
 ## Using a skill
 
 Copy or symlink a skill directory into `~/.claude/skills/` (global) or a project's
