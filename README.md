@@ -90,6 +90,22 @@ that bit in production.
 - [`infra/references/security-secrets-access.md`](infra/references/security-secrets-access.md):
   secrets, least-privilege IAM, the load-balancer posture, and private access.
 
+### loop
+
+How to run a long, multi-phase build autonomously with a self-continuing loop,
+distilled from shipping a large batch one phase at a time without losing
+correctness or context.
+
+One phase per fresh context window; orient from the git log rather than memory;
+make the smallest correct change per sub-plan; verify it for real before
+committing; commit and push one sub-plan at a time; then checkpoint to the next
+phase with a scheduled wake-up that hands the full spec and updated progress
+forward. Pairs with a project-guide skill for the repo's own commands and a
+house-rules skill for voice and commit conventions.
+
+- [`loop/SKILL.md`](loop/SKILL.md): the rhythm, the shape of a loop prompt, the
+  per-sub-plan steps, the checkpoint and stop conditions, and the checklist.
+
 ## Using a skill
 
 Copy or symlink a skill directory into `~/.claude/skills/` (global) or a project's
