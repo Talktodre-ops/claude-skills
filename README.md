@@ -106,6 +106,67 @@ house-rules skill for voice and commit conventions.
 - [`loop/SKILL.md`](loop/SKILL.md): the rhythm, the shape of a loop prompt, the
   per-sub-plan steps, the checkpoint and stop conditions, and the checklist.
 
+### testing
+
+How to test a full-stack app to a shipping bar. The test layers (unit, integration,
+contract, end-to-end, smoke, regression, security), what to run per change versus per
+release, the cross-viewport visual discipline, and the principle that a green
+type-check is not a green feature. Fetches current framework docs with Context7.
+
+- [`testing/SKILL.md`](testing/SKILL.md): the method, the layers, when to run what,
+  and the non-negotiables.
+- [`testing/references/frontend.md`](testing/references/frontend.md): type-check and
+  lint, unit and component tests, Playwright e2e, and the cross-viewport visual harness.
+- [`testing/references/backend.md`](testing/references/backend.md): unit and
+  integration tests, async patterns, seed-and-cleanup, live probes, and contract tests.
+- [`testing/references/security.md`](testing/references/security.md): authorization
+  and tenant isolation, injection, upload safety, secrets, and dependency scanning.
+
+### clean-code
+
+Standards for writing, refactoring, and reviewing source so it stays readable and
+correct: comment the why not the what, intention-revealing names, small
+single-purpose functions, explicit error handling, and the smells to watch for.
+
+- [`clean-code/SKILL.md`](clean-code/SKILL.md): the principles and the pre-merge
+  checklist, with language notes for Go and TypeScript/React.
+
+### dre-house-rules
+
+Standing defaults for tone and craft: a direct, plain voice, no em dashes, the AI
+tells to avoid, and the safety and code conventions to hold to. A personal
+house-rules skill; adapt the specifics to your own.
+
+- [`dre-house-rules/SKILL.md`](dre-house-rules/SKILL.md).
+
+### ui-styling, ui-ux-pro-max
+
+Building accessible interfaces. `ui-styling` covers shadcn/ui (Radix plus Tailwind),
+utility-first Tailwind, and canvas-based visual design, with reference material and
+canvas fonts. `ui-ux-pro-max` is a design-intelligence pack of styles, color
+palettes, font pairings, product types, UX guidelines, and chart types across many
+stacks, with data and templates.
+
+- [`ui-styling/SKILL.md`](ui-styling/SKILL.md), [`ui-ux-pro-max/SKILL.md`](ui-ux-pro-max/SKILL.md).
+
+### design, design-system, brand, banner-design, slides
+
+A design toolchain: brand identity and voice, three-layer design tokens, logo and
+banner generation, corporate-identity deliverables, and strategic HTML presentations
+with Chart.js.
+
+- [`design/SKILL.md`](design/SKILL.md), [`design-system/SKILL.md`](design-system/SKILL.md),
+  [`brand/SKILL.md`](brand/SKILL.md), [`banner-design/SKILL.md`](banner-design/SKILL.md),
+  [`slides/SKILL.md`](slides/SKILL.md).
+
+### ian-xiaohei-illustrations
+
+Generating Ian-style whimsical hand-drawn illustrations for Chinese articles (the
+"Xiaohei" IP), with style references and example assets. The skill content is in
+Chinese.
+
+- [`ian-xiaohei-illustrations/SKILL.md`](ian-xiaohei-illustrations/SKILL.md).
+
 ## Using a skill
 
 Copy or symlink a skill directory into `~/.claude/skills/` (global) or a project's
