@@ -88,6 +88,18 @@ Layouts must fill the space on desktop (not cram into a narrow centered column),
 stack on mobile, and go multi-column on tablet. A snapshot that renders blank is a
 failure even if the assertion passed; look at the image.
 
+## Drive the real app as a human
+
+Hermetic stubbed specs cannot catch a broken login, a wrong redirect, a dead button,
+or a control shoved off-screen. For the flows a user actually walks, add a test that
+logs in through the **real form** and drives the **real backend**, not a stub. Seed a
+real verified, onboarded account (an idempotent script in the app container), type
+into the login form (do not inject a token, or you skip testing login), and navigate
+the screens a person would. Run it headed and slowed to watch it on screen
+(`PW_SLOWMO=600 ... --headed --workers=1`), headless in CI. The full pattern, the
+project setup, and the selector gotchas are in
+[`references/playwright-human-login.md`](references/playwright-human-login.md).
+
 ## Fetching current docs (Context7)
 
 Test frameworks and their assertions change across versions. Do not answer from
