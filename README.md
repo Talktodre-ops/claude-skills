@@ -50,6 +50,21 @@ request id.
 - [`observability/references/deploy-and-access.md`](observability/references/deploy-and-access.md):
   single-host deploy, secrets and IAM, the private-access model, and adaptation.
 
+### database
+
+Production-grade PostgreSQL for an app backend, distilled from a real multi-tenant
+SaaS on Neon: connection pooling that does not exhaust the server, indexing the hot
+paths, Postgres-native search instead of a separate cluster, and writes that survive
+a retry.
+
+The pool-times-processes math that causes "too many connections" and the small
+pooled-endpoint fix, functional and partial indexes matched to the query and confirmed
+with EXPLAIN, pg_trgm / native FTS / pg_search-BM25 / pgvector picked by the actual
+need, and the idempotency, claim, and append-only-ledger patterns for retry-safe writes.
+
+- [`database/SKILL.md`](database/SKILL.md): connections, indexing, search, idempotent
+  writes, migration discipline, and the pre-production checklist.
+
 ### multi-tenant
 
 Keeping one tenant's data out of another tenant's view in a shared-database SaaS,
