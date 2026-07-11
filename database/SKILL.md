@@ -1,6 +1,6 @@
 ---
 name: database
-description: Production-grade PostgreSQL for an app backend, distilled from a real multi-tenant SaaS on Neon. Covers connection pooling that does not exhaust the server (pooled endpoint, capped app pools, the pool-times-processes math, PgBouncer transaction-mode rules), indexing the hot paths (foreign keys, composite order, functional and partial indexes, verifying with EXPLAIN, CONCURRENTLY on live tables), Postgres-native search instead of a separate cluster (pg_trgm for fuzzy/substring, native FTS, pg_search/BM25 as the Elasticsearch-in-Postgres option, pgvector for semantic), idempotent and retry-safe writes (unique keys, the claim pattern for exactly-once, dedup, append-only ledgers for money), and migration discipline. Load when configuring a DB connection, writing or reviewing queries and migrations, adding search, diagnosing "too many connections" or slow reads, or making a write safe to retry.
+description: Production-grade PostgreSQL for an app backend, distilled from a real multi-tenant SaaS on Neon. Covers connection pooling that does not exhaust the server (pooled endpoint, capped app pools, the pool-times-processes math, PgBouncer transaction-mode rules), indexing the hot paths (foreign keys, composite order, functional and partial indexes, verifying with EXPLAIN, CONCURRENTLY on live tables), Postgres-native search instead of a separate cluster (pg_trgm for fuzzy/substring, native FTS, pg_search/BM25 as the Elasticsearch-in-Postgres option, pgvector for semantic), idempotent and retry-safe writes (unique keys, the claim pattern that eliminates a check-then-act race for exactly-once, dedup, exponential backoff with jitter, append-only ledgers for money), and migration discipline. Load when configuring a DB connection, writing or reviewing queries and migrations, adding search, diagnosing "too many connections" or slow reads, handling a race condition or concurrent writers, or making a write safe to retry.
 ---
 
 # Production-grade PostgreSQL
@@ -112,6 +112,12 @@ dropped response) will be. Design writes so a repeat is harmless.
 - **Retry-safe tasks guard on state.** At the top of the task: if the work is already
   done, return; if it is already in flight, let the in-flight path finish rather than
   starting a duplicate. A `max_retries` retry then costs nothing.
+- **Retry with exponential backoff and jitter, never a tight loop.** A failed external
+  call (LLM, payment, another service) retries after `base * 2**attempt` seconds, capped
+  at a ceiling, plus random jitter so a fleet does not retry in lockstep and stampede the
+  dependency. Retry only idempotent operations (see above) and only transient failures
+  (timeouts, 5xx, rate limits), not a 4xx that will fail again. Give up after a bounded
+  number of attempts and record the failure rather than retrying forever.
 - **Side effects never break the transaction, and never double-fire.** Queue the email
   and the notification best-effort (wrapped, logged on failure), so a mail outage does
   not roll back the write. Dedup them (a `dedupe_key` on notifications) so a retry does
