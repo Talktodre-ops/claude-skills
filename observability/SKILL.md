@@ -11,7 +11,7 @@ Django and ECS deployment. The configs are real (Prometheus scrape, Loki schema,
 Alloy pipeline, Grafana provisioning, Fluent Bit, django-prometheus, Sentry SDK),
 not pseudocode.
 
-This file is the map. The four reference files hold the implementation:
+This file is the map. The five reference files hold the implementation:
 
 - `references/stack-and-compose.md`: the components, version pinning, the Docker
   Compose wiring, and each tool's config (Prometheus, Loki on S3, Grafana, Alloy).
@@ -21,6 +21,10 @@ This file is the map. The four reference files hold the implementation:
   provisioned from files, so the box is reproducible.
 - `references/deploy-and-access.md`: the single-host deploy, secrets and IAM,
   retention, the private-network access model, the gotchas, and how to adapt it.
+- `references/diagnostics-playbook.md`: field notes from a live FastAPI + Celery
+  + React app. The toolkit (which tool answers which question), the diagnostic
+  recipes (symptom to fix, including query-fan-out / N+1 detection), the
+  request_id join key, and the gotchas that cost time.
 
 Read a reference when you reach that layer. Lift the pattern, rename to the target
 project, and pin the versions before you ship.
