@@ -65,6 +65,23 @@ need, and the idempotency, claim, and append-only-ledger patterns for retry-safe
 - [`database/SKILL.md`](database/SKILL.md): connections, indexing, search, idempotent
   writes, migration discipline, and the pre-production checklist.
 
+### payment
+
+Integrating Paddle Billing (a Merchant of Record) into a SaaS backend the reliable
+way, distilled from a real FastAPI + Celery + React system.
+
+Webhooks are the source of truth and the database is an idempotent projection of
+Paddle's state, ingested through an inbox/outbox pipeline on the existing task
+queue rather than a new broker. Covers the data model, the checkout, subscription,
+and one-off/credit-pack flows, the verified Paddle event catalog and signature
+scheme, and the edge cases that matter: out-of-order and duplicate webhooks, lost
+deliveries, slow-network retries, dunning, refunds and chargebacks, cancel and
+downgrade timing, currency, and reconciliation. With the tradeoffs stated.
+
+- [`payment/SKILL.md`](payment/SKILL.md): the principle, the pipeline, the data
+  model, the flows, the Paddle specifics, the edge cases, the tradeoffs, the build
+  order, and the non-negotiables.
+
 ### multi-tenant
 
 Keeping one tenant's data out of another tenant's view in a shared-database SaaS,
