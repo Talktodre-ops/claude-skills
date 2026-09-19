@@ -50,6 +50,23 @@ request id.
 - [`observability/references/deploy-and-access.md`](observability/references/deploy-and-access.md):
   single-host deploy, secrets and IAM, the private-access model, and adaptation.
 
+### latency-tracing
+
+How to find out where a slow API request actually spends its time, distilled from a
+night spent on a Django and DRF dashboard that timed out while the server answered
+every call with a 200.
+
+The measurement ladder that makes each number interpretable (the floor, execution
+versus distance, round trips counted from a trace, behaviour under a burst), wiring
+OpenTelemetry and Jaeger into a forking WSGI server without getting the two halves
+backwards, the four things worth reading in a waterfall, and the fixes each finding
+implies: no-op round trips, a hot read cached without making new data wait behind it,
+N+1s, and the worker model. Plus the evidence to have in hand before reaching for an
+index or a search cluster.
+
+- [`latency-tracing/SKILL.md`](latency-tracing/SKILL.md): the ladder, the wiring, the
+  traps, and the fixes.
+
 ### database
 
 Production-grade PostgreSQL for an app backend, distilled from a real multi-tenant
