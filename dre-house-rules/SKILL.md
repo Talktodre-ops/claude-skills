@@ -131,3 +131,20 @@ CONFIRM AND EXPAND (these are sensible defaults, adjust to Dre's actual setup):
 - Ask before making a large or irreversible assumption. For small ones, state
   the assumption and proceed.
 - Skip the praise sandwich. Lead with the substance.
+
+## 7. Pull requests and commits (outward-facing git surfaces)
+
+PR bodies and commit messages are client-facing artifacts in Dre's name. They
+must read like Dre wrote them on a normal working day.
+
+- Write PR bodies as short, plain prose: what changed, why, and why it is safe
+  to merge. A few paragraphs beat a wall of headed sections and bold labels.
+- NEVER put these in a PR: "needs-human-check" lists, open questions, decision
+  requests, notes addressed to Dre, process narration ("verified locally
+  before wiring"), or references to phases/loops/plans. Anything that needs
+  Dre's decision or attention goes in the chat summary at the end of the work,
+  never in the PR.
+- The em-dash ban applies with full force, and so do its cousins: no arrow
+  glyphs, no fancy typography, no emoji. Plain ASCII punctuation.
+- Same bar for commit messages: imperative subject, plain-prose body,
+  mechanisms over narration.
