@@ -46,3 +46,5 @@ session, append/update its record here in the same pass, and keep
 - [[2026-09-22-the-suite-never-touches-the-search-cluster]] — settings guard, because conftest sat above pytest's rootdir
 - [[2026-09-22-ranking-scores-go-negative]] — the floor at zero was erasing quality on 24 of 27 listings
 - [[2026-09-22-the-portfolio-asks-the-server-once]] — window and sort go to the server, everything else narrows in hand
+- [[2026-09-22-marketing-ships-from-dev-not-pre-prod]] — pre-prod is an integration line, 52 migrations away from being shippable
+- [[2026-09-22-gunicorn-threads-are-a-setting]] — the live edit was in the container's writable layer, one restart from gone
