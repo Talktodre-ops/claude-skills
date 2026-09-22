@@ -40,3 +40,9 @@ session, append/update its record here in the same pass, and keep
 - [[2026-09-02-opensearch-3-7]] — 3.7 everywhere, cluster upgraded before the platform deploy
 - [[2026-09-03-search-database-fallbacks]] — every read path degrades, scoped views opt in
 - [[2026-09-03-offer-application-org-derived]] — org derived from property.owner, no column
+- [[2026-09-19-a-verdict-gate-without-a-scanner]] — the gate is built, the scanner is not, and the row says so
+- [[2026-09-19-migrated-documents-keep-their-old-bucket]] — backfilled files stay put; relocate is a separate, restartable run
+- [[2026-09-19-sale-agreements-keep-their-model-for-now]] — a sale is refused at the join rather than half split
+- [[2026-09-22-the-suite-never-touches-the-search-cluster]] — settings guard, because conftest sat above pytest's rootdir
+- [[2026-09-22-ranking-scores-go-negative]] — the floor at zero was erasing quality on 24 of 27 listings
+- [[2026-09-22-the-portfolio-asks-the-server-once]] — window and sort go to the server, everything else narrows in hand

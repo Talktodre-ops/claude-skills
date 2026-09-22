@@ -94,3 +94,31 @@ two is separate and comes first.
 Nothing directly. It settles the open question left by the Rent Ops round,
 where the D2 decision unified documents but occupancy was left with three
 models.
+
+## Amendment: the noun is Tenancy, not let
+
+Added 2026-09-19, later the same day, during the Portfolio and documents
+round. Source: Dre.
+
+The name changes. Everything else in this record stands.
+
+"Let" was the customer's word for the relationship and `rent_ops.Tenancy` was
+the schema's, and this record picked the customer's. In practice the product
+now says one and the code says the other, which is exactly the split this
+round exists to close. The word of record is **tenancy**, in the interface as
+well as in the model.
+
+So: the Portfolio tab is Tenancies, the action is Add a tenancy, the drawer
+ends a tenancy, and every empty state, toast, confirmation, aria label and
+notification body says tenancy. The model was always `Tenancy` and does not
+move.
+
+Two things deliberately do not change. URL parameter **values** stay as they
+are, so `?view=lets` still resolves and links already sent in notifications
+keep working: renaming what a link carries breaks things that were sent
+before the rename, and the word a person reads is what mattered here. And the
+filename of this record stays as it is, because the journal's wiki links
+point at it.
+
+The substance, one record for one relationship with the agreement demoted
+beside it and sales leaving, is untouched. Only the name is superseded.

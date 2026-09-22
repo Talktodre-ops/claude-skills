@@ -63,3 +63,30 @@ foundation for a screen.
 It completes decision D2, which unified documents in principle in 2026-09-15
 but left `PropertyDocument` unmigrated and said nothing about delivery,
 organisation-level documents or bulk sending.
+
+## Where each half of the rail ended up, as built
+
+Added 2026-09-19 when the decision was implemented, because a record that
+promises protection should say exactly which protection.
+
+Two separate facts make up "a per-let document can never be sent to many",
+and they are enforced in different places.
+
+**A bulk send cannot exist for a per-let document.** This is a database rule.
+`DocumentDeliveryBatch` carries a `document_scope` column copied from the
+document, with a check constraint that it is always `ORGANISATION`, and
+`DocumentDelivery` carries the same column with a constraint that a row with
+a batch is always `ORGANISATION`. Both columns are set in `save()` from the
+document itself and are never read from a payload. A command, a data
+migration or a second service writing straight through the ORM is refused by
+Postgres, not by whichever code path happened to be careful.
+
+**A per-let document can only reach somebody who is on that let.** This one
+spans tables, so a check constraint cannot express it. It lives in
+`DocumentDelivery.save`, through `enforce_rail`, which means no view, task or
+shell session can route around it, but a `bulk_create` would. Nothing in the
+product bulk-creates a delivery, and the batch constraint above is what stops
+the only fan-out path that matters.
+
+The distinction is worth keeping straight: one is a rule the database holds,
+the other is a rule the model holds.
