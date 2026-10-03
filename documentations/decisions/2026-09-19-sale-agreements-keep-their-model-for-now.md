@@ -1,6 +1,7 @@
 # Sale agreements keep their model for now, and leave the rent roll by guard
 
-Date: 2026-09-19. Status: accepted. Source: the Rent Ops one-let round,
+Date: 2026-09-19. Status: superseded by
+[[2026-09-24-a-sale-is-its-own-record]] on 2026-09-24. Source: the Rent Ops one-let round,
 stopping at step five as `.agents/rent-ops-one-let-loop.md` allows.
 
 ## Decision

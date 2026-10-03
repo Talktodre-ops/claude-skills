@@ -89,6 +89,22 @@ you spawn: say this in its brief.
 - The bar is the loop skill's: verify real behavior before commit, never commit
   red, never weaken a test to pass it.
 
+## Test personas (2026-09-24)
+
+Four accounts stand in for real users when testing from the user's side:
+tenant `tolu.tenant@heimly.com`, landlord `ngozi.landlord@heimly.com`,
+individual agent `femi.agent@heimly.com`, developer company
+`amaka.developer@heimly.com` (Cedarline Homes Ltd), each with listings made
+through the wizard. They live in the shared pre-prod Neon database. The file
+of record is `FE-heimly/e2e/PERSONAS.md`: who each one is, what they should
+and must never see, their listings, the rules for using them, and where the
+shared password lives (`FE-heimly/e2e/.env.personas`, local only). Specs that
+act as a persona import `e2e/personas/test.ts` and use
+`test.use({ storageState: authStatePath("<key>") })`; run them with
+`npx playwright test --project=personas`. Never use them against production,
+never edit their rows by hand, and never touch `dre@heimly.com`, which is
+Dre's own account.
+
 ## Feature flags (decision D7)
 
 Features that are multi-week, risky (money/auth/core flows), or demo-in-prod merge

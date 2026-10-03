@@ -42,9 +42,15 @@ session, append/update its record here in the same pass, and keep
 - [[2026-09-03-offer-application-org-derived]] — org derived from property.owner, no column
 - [[2026-09-19-a-verdict-gate-without-a-scanner]] — the gate is built, the scanner is not, and the row says so
 - [[2026-09-19-migrated-documents-keep-their-old-bucket]] — backfilled files stay put; relocate is a separate, restartable run
-- [[2026-09-19-sale-agreements-keep-their-model-for-now]] — a sale is refused at the join rather than half split
+- [[2026-09-19-sale-agreements-keep-their-model-for-now]] — a sale is refused at the join rather than half split (superseded)
 - [[2026-09-22-the-suite-never-touches-the-search-cluster]] — settings guard, because conftest sat above pytest's rootdir
 - [[2026-09-22-ranking-scores-go-negative]] — the floor at zero was erasing quality on 24 of 27 listings
 - [[2026-09-22-the-portfolio-asks-the-server-once]] — window and sort go to the server, everything else narrows in hand
 - [[2026-09-22-marketing-ships-from-dev-not-pre-prod]] — pre-prod is an integration line, 52 migrations away from being shippable
 - [[2026-09-22-gunicorn-threads-are-a-setting]] — the live edit was in the container's writable layer, one restart from gone
+- [[2026-09-24-a-sale-is-its-own-record]]: plan, six steps, the rent pipeline; supersedes keeping sales on the lease
+- [[2026-09-24-home-quotes-what-is-owed-now]]: monthly ledger, cycle headline, one number on both sides
+- [[2026-09-24-service-charge-is-part-of-the-let]]: the offer's move in total and the roll finally agree
+- [[2026-09-24-a-payment-report-carries-evidence]]: a reference or a proof, visible to both sides, shaped for escrow
+- [[2026-09-24-past-homes-show-only-what-heimly-knows]]: backfilled history never shows money owed
+- [[2026-09-25-google-measurement-stays-opt-in]]: GA4 and Ads opt-in; our own in-app count is for everyone, same event names
