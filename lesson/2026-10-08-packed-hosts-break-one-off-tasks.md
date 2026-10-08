@@ -21,4 +21,4 @@ One-off tasks go through the capacity provider strategy with only the memory the
 
 `run-task` returning no task (read its `failures`), or the ASG's desired count higher after a deploy than before.
 
-Related: [[2026-10-08-instance-refresh-blocked-by-scale-in-protection]]
+Related: [[2026-10-08-instance-refresh-stalls-under-scale-in-protection]]
