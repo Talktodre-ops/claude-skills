@@ -14,6 +14,9 @@ Designed to be lifted into an external indexed vault (Obsidian-style) later, so:
   them. Never delete a record; a wrong decision documented is the most valuable
   kind.
 
+What went wrong, or nearly did, goes in the lessons folder (`../lesson/`), one
+file per lesson, same conventions.
+
 Standing rule for Claude sessions: when a decision is made or changed in a
 session, append/update its record here in the same pass, and keep
 `.agents/phase2-build-plan.md` in sync when it touches the plan.
@@ -54,3 +57,5 @@ session, append/update its record here in the same pass, and keep
 - [[2026-09-24-a-payment-report-carries-evidence]]: a reference or a proof, visible to both sides, shaped for escrow
 - [[2026-09-24-past-homes-show-only-what-heimly-knows]]: backfilled history never shows money owed
 - [[2026-09-25-google-measurement-stays-opt-in]]: GA4 and Ads opt-in; our own in-app count is for everyone, same event names
+- [[2026-10-08-production-runs-on-two-graviton-hosts]]: about $345 to $135 a month; API x2, Celery in bridge mode, fck-nat, EMQX by service discovery
+- [[2026-10-08-search-runs-on-postgres]]: OpenSearch deleted; AND words, substring, trigram near-miss at 0.4
