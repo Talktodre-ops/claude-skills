@@ -38,3 +38,4 @@ lesson here in the same session and add it to the index.
 - [[2026-10-08-the-api-container-does-not-reload]]: The local API does not reload Python changes
 - [[2026-10-08-the-email-cap-is-the-signup-cap]]: The email provider's daily cap is the sign-up cap
 - [[2026-10-08-worktree-test-runner-differs-from-the-api-container]]: A different test runner environment produces failures the code does not have
+- [[2026-10-08-packed-hosts-break-one-off-tasks]]: Packed hosts break one-off tasks and leave rollouts scaled out
