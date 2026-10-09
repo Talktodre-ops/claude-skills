@@ -139,6 +139,22 @@ that bit in production.
 - [`infra/references/security-secrets-access.md`](infra/references/security-secrets-access.md):
   secrets, least-privilege IAM, the load-balancer posture, and private access.
 
+### aws
+
+Running a small production app on AWS for the least money without losing
+stability, from a cut of about $350 to about $135 a month that also took the API
+from one task to two. Graviton hosts, bridge-mode workers, single-AZ RDS,
+fck-nat instead of a NAT gateway, Cloud Map instead of an internal load balancer,
+Postgres instead of a search cluster, how deploys must work on packed hosts, and
+the traps that are not obvious until they bite.
+
+- [`aws/README.md`](aws/README.md): the deployment itself. Every service used,
+  the costs, the trade-offs and how it is run.
+- [`aws/SKILL.md`](aws/SKILL.md): the AWS skill. How to cut the bill, deploys on
+  packed hosts, moving hosts, and the non-obvious traps.
+- [`aws/terraform/SKILL.md`](aws/terraform/SKILL.md): the Terraform skill. Keeping
+  code, state and the account consistent, and the Terraform traps.
+
 ### loop
 
 How to run a long, multi-phase build autonomously with a self-continuing loop,
