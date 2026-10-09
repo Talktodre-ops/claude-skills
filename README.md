@@ -138,6 +138,12 @@ that bit in production.
   approval gate, the infra-to-app handoff, and the safe ECS deploy ordering.
 - [`infra/references/security-secrets-access.md`](infra/references/security-secrets-access.md):
   secrets, least-privilege IAM, the load-balancer posture, and private access.
+- [`infra/docker/SKILL.md`](infra/docker/SKILL.md): Docker everywhere. Non-root
+  images, layer order, secrets, signals, and the restart, recreate or rebuild
+  table. Split into [`infra/docker/dev/SKILL.md`](infra/docker/dev/SKILL.md)
+  (fast loops, file ownership, Compose, SELinux, the firewall Docker bypasses) and
+  [`infra/docker/prod/SKILL.md`](infra/docker/prod/SKILL.md) (hardening, sha tags,
+  multi-arch, build-time config, shutdown, migrations, scanning).
 
 ### aws
 
