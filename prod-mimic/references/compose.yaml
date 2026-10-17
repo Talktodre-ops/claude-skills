@@ -1,0 +1,87 @@
+# A production-sized copy of the API stack, for load tests on one machine.
+# Copy the sizes from production (SKILL.md step 1), not from this file.
+#
+#   docker compose -p mimic up -d db cache broker      # then migrate and seed
+#   docker compose -p mimic up -d                      # the rest
+#
+# Knobs: THREADS (gunicorn threads), POOLER_HOST (empty = straight to the
+# database), POOL_SIZE, SUPERVISOR_CONF (mount a variant app-server config).
+# ${VAR-default} on purpose: an empty value must stay empty.
+name: mimic
+
+x-api: &api
+  image: ${IMAGE:?build the production commit and set IMAGE}
+  env_file: mimic.env
+  environment:
+    GUNICORN_THREADS: ${THREADS-8}
+    DB_POOLER_HOST: ${POOLER_HOST-127.0.0.1}
+    DB_POOLER_PORT: "6432"
+  volumes:
+    - ./mimic.env:/usr/local/app/.env:ro
+    # - ${SUPERVISOR_CONF}:/etc/supervisor/supervisord.conf:ro
+  cpus: 0.5            # the task's CPU
+  mem_limit: 1472m     # the task's memory, less the sidecars' share
+  cpuset: "0-7"        # the copy's cores; k6 gets the rest
+  depends_on: [db, cache]
+
+x-pooler: &pooler
+  image: edoburu/pgbouncer:v1.25.2-p0
+  env_file: mimic.env
+  environment:
+    POOL_SIZE: ${POOL_SIZE-20}
+  entrypoint: ["sh", "/pgbouncer.sh"]
+  volumes: [./pgbouncer.sh:/pgbouncer.sh:ro]
+  mem_limit: 64m
+  cpuset: "0-7"
+
+services:
+  db:
+    image: postgis/postgis:16-3.4      # match production's major version
+    env_file: mimic.env
+    command: >
+      postgres -c max_connections=181 -c shared_buffers=512MB
+      -c effective_cache_size=1GB -c work_mem=4MB -c random_page_cost=4
+    cpus: 2
+    mem_limit: 2g
+    cpuset: "0-7"
+    volumes: [dbdata:/var/lib/postgresql/data]
+
+  cache:
+    image: valkey/valkey:8.0-bookworm
+    command: valkey-server --maxmemory 400mb --maxmemory-policy volatile-lru --save ""
+    mem_limit: 512m
+    cpuset: "0-7"
+
+  # Each API container gets its own pooler on its own localhost, like a task.
+  api1: *api
+  api2: *api
+  pool1:
+    <<: *pooler
+    network_mode: service:api1
+  pool2:
+    <<: *pooler
+    network_mode: service:api2
+
+  worker:
+    image: ${IMAGE}
+    env_file: mimic.env
+    volumes: [./mimic.env:/usr/local/app/.env:ro]
+    # Production's concurrency, not this machine's core count.
+    command: celery -A core.celery.app worker -l warning --concurrency=2
+    cpus: 0.25
+    mem_limit: 1g
+    cpuset: "0-7"
+    depends_on: [db, cache]
+
+  lb:
+    image: nginx:1.27-alpine
+    volumes: [./nginx.conf:/etc/nginx/nginx.conf:ro]
+    cpus: 1
+    mem_limit: 128m
+    ulimits:
+      nofile: 65536    # the stand-in must outsize what it replaces
+    cpuset: "0-7"
+    depends_on: [api1, api2]
+
+volumes:
+  dbdata:

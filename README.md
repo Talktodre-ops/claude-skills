@@ -67,6 +67,24 @@ index or a search cluster.
 - [`latency-tracing/SKILL.md`](latency-tracing/SKILL.md): the ladder, the wiring, the
   traps, and the fixes.
 
+### prod-mimic
+
+How to load-test a production stack without touching production: a calibrated copy
+of it on one machine, sized link by link, pushed with step tests until it breaks.
+
+Reading production's real shape, CPU and memory limits like the tasks, a PgBouncer
+sidecar on the container's localhost, a capped database with a network delay, a
+load-balancer stand-in that cannot be the thing that fails, fake data instead of real
+users, calibration against a handful of ordinary production requests, the monitor,
+and a symptom-to-cause table for reading the results. Distilled from a Django,
+gunicorn, PgBouncer and Postgres stack on ECS, where it found the real wall (API CPU),
+a password hasher eating half of it, a keep-alive mismatch behind daily 502s and a
+worker-recycling stall.
+
+- [`prod-mimic/SKILL.md`](prod-mimic/SKILL.md): the method, the reading, the findings.
+- [`prod-mimic/references/`](prod-mimic/references/): compose file, load-balancer
+  stand-in, sidecar script, step test, calibration, per-step analyzer, monitor.
+
 ### database
 
 Production-grade PostgreSQL for an app backend, distilled from a real multi-tenant

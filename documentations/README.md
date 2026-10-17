@@ -59,3 +59,4 @@ session, append/update its record here in the same pass, and keep
 - [[2026-09-25-google-measurement-stays-opt-in]]: GA4 and Ads opt-in; our own in-app count is for everyone, same event names
 - [[2026-10-08-production-runs-on-two-graviton-hosts]]: about $345 to $135 a month; API x2, Celery in bridge mode, fck-nat, EMQX by service discovery
 - [[2026-10-08-search-runs-on-postgres]]: OpenSearch deleted; AND words, substring, trigram near-miss at 0.4
+- [[2026-10-17-api-capacity-from-a-calibrated-copy]]: a calibrated copy found API CPU the wall; Argon2 at OWASP minimum, signed-out cache, keep-alive 65, max-requests 10000

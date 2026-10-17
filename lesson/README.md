@@ -39,3 +39,7 @@ lesson here in the same session and add it to the index.
 - [[2026-10-08-the-email-cap-is-the-signup-cap]]: The email provider's daily cap is the sign-up cap
 - [[2026-10-08-worktree-test-runner-differs-from-the-api-container]]: A different test runner environment produces failures the code does not have
 - [[2026-10-08-packed-hosts-break-one-off-tasks]]: Packed hosts break one-off tasks and leave rollouts scaled out
+- [[2026-10-17-a-test-stand-in-must-outsize-what-it-replaces]]: A load-balancer stand-in that runs out of file descriptors measures the rig
+- [[2026-10-17-cheaper-requests-fire-request-counted-limits]]: Make requests cheaper and request-counted limits fire more often
+- [[2026-10-17-keep-alive-must-outlast-the-load-balancer]]: The app's keep-alive must outlast the load balancer's idle timeout
+- [[2026-10-17-library-defaults-assume-more-cores]]: Library defaults assume a machine you may not have
