@@ -256,6 +256,30 @@ Chinese.
 
 - [`ian-xiaohei-illustrations/SKILL.md`](ian-xiaohei-illustrations/SKILL.md).
 
+### payment-infrastructure
+
+A blueprint for building payment infrastructure inside a product that is not a bank:
+escrow (hold, confirm, release, dispute, refund), direct split payments, subscription
+renewals and payout accounts for recipients who may not be on the platform, distilled
+from Heimly's payments build on Payscrow and Paystack with Django, Celery, Postgres and
+Next.js.
+
+The seven principles (you do not hold the money; the database is the record; nothing is
+funded or released on your say-so; integer minor units; append-only; idempotent
+everywhere; whoever pays never decides the split), the shape (one walled-off module, an
+inbox and outbox on the existing queue, side effects in a task after commit), the build
+order, the non-negotiables, and the mistakes that bit.
+
+- [`payment-infrastructure/SKILL.md`](payment-infrastructure/SKILL.md): the entry point.
+- [`payment-infrastructure/references/ledger.md`](payment-infrastructure/references/ledger.md):
+  money type, accounts, postings, append-only rules, reconciliation, the Money screen's read model.
+- [`payment-infrastructure/references/state-machine-and-messaging.md`](payment-infrastructure/references/state-machine-and-messaging.md):
+  the state table, the transition service, the webhook inbox, the command outbox, sweepers, idempotency.
+- [`payment-infrastructure/references/providers-and-fakes.md`](payment-infrastructure/references/providers-and-fakes.md):
+  the provider protocol, who may hold the money, direct splits, a fake that signs real webhooks, the rollout ladder.
+- [`payment-infrastructure/references/security-checklist.md`](payment-infrastructure/references/security-checklist.md):
+  the threat table, the who-gains review, the launch gate, the operational flags.
+
 ## Using a skill
 
 Copy or symlink a skill directory into `~/.claude/skills/` (global) or a project's

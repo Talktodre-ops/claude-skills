@@ -140,6 +140,20 @@ RoleGuard, never in flags.
 - Record any important AWS value that CLI/Terraform returns in
   `Infra-Heimly/INFRA_REFERENCE.md` (gitignored, local source of truth).
 
+## Payments (since 2026-10-19)
+
+Money lives in the `payments` Django app, walled off by an import-linter contract: other
+apps call `payments/api.py` only, and `lint-imports` runs in CI. Integer kobo, append-only
+ledger and audit (database triggers), inbox and outbox on the `payments` Celery queue (a
+`celery_payments` worker in both compose files), side effects in `after_transition` after
+commit. Escrow provider by `PAYMENTS_ESCROW_PROVIDER` (`fake` without a Payscrow key;
+the fake signs real webhooks to our own endpoint and needs `PAYMENTS_SELF_BASE_URL`,
+`PAYMENTS_PUBLIC_BASE_URL`, `PAYMENTS_ALLOW_FAKE_PROVIDER`, `PAYMENTS_FERNET_KEYS`).
+Flags: `payments` and `payments_escrow` OFF, `payments_live` the kill switch ON. Contract
+of record `.agents/loops/payments-build-contract.md`; deep spec `.agents/loops/escrow-build.md`;
+blueprint in the `payment-infrastructure` skill. All payments work goes on `payments-be` /
+`payments-fe` (BE #240 / FE #211), merged only when Dre says.
+
 ## Decision journal
 
 Significant decisions (what, why, alternatives rejected, revisit-when) are

@@ -43,3 +43,14 @@ lesson here in the same session and add it to the index.
 - [[2026-10-17-cheaper-requests-fire-request-counted-limits]]: Make requests cheaper and request-counted limits fire more often
 - [[2026-10-17-keep-alive-must-outlast-the-load-balancer]]: The app's keep-alive must outlast the load balancer's idle timeout
 - [[2026-10-17-library-defaults-assume-more-cores]]: Library defaults assume a machine you may not have
+- [[2026-10-19-review-money-paths-by-asking-who-gains]]: Six money-path defects behind 95 green tests, found by asking who gains if they lie
+- [[2026-10-19-a-self-call-needs-two-base-urls]]: A service that calls itself needs an internal URL, a public URL and the internal host allowed
+- [[2026-10-19-a-kill-flag-outside-the-kill-tuple-reads-as-on]]: A kill flag with inverted meaning reads as "stop" wherever flags default on
+- [[2026-10-19-a-distant-database-makes-round-trips-the-cost]]: Against a distant database the cost is trips, and the slow-request log counts none of them inside atomic
+- [[2026-10-19-network-inside-the-lock-stalls-every-write]]: A provider call under a row lock turns the row into a queue
+- [[2026-10-19-the-test-run-shares-the-live-cache]]: pytest in the API container shares the live Redis; a busy app leaks into flag tests
+- [[2026-10-19-a-rebuilt-test-database-has-no-row-level-security]]: `--create-db` with `--nomigrations` installs no policies, so the RLS test fails
+- [[2026-10-19-a-field-named-property-shadows-the-builtin]]: `property = ForeignKey(...)` then `@property` breaks every import
+- [[2026-10-19-an-idempotency-key-is-a-uuid-not-a-string]]: A derived key with a suffix is refused as invalid; the mock never checked
+- [[2026-10-19-a-build-must-survive-a-reboot]]: Commit in slices; after a reboot bring back postgres-test and resume builders from what is on disk
+- [[2026-10-19-a-scoped-upload-endpoint-cannot-serve-another-persona]]: Reuse the service, not the view; a tenant got 404 from the landlord-scoped upload

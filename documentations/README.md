@@ -57,6 +57,16 @@ session, append/update its record here in the same pass, and keep
 - [[2026-09-24-a-payment-report-carries-evidence]]: a reference or a proof, visible to both sides, shaped for escrow
 - [[2026-09-24-past-homes-show-only-what-heimly-knows]]: backfilled history never shows money owed
 - [[2026-09-25-google-measurement-stays-opt-in]]: GA4 and Ads opt-in; our own in-app count is for everyone, same event names
+- [[2026-10-05-escrow-runs-on-payscrow-inside-one-walled-off-app]]: Payscrow holds, Paystack direct, payer pays the fee, provider fee from the API, release on confirm inside a window, one walled-off app with the DB as the record; supersedes escrow-start-deferred
 - [[2026-10-08-production-runs-on-two-graviton-hosts]]: about $345 to $135 a month; API x2, Celery in bridge mode, fck-nat, EMQX by service discovery
 - [[2026-10-08-search-runs-on-postgres]]: OpenSearch deleted; AND words, substring, trigram near-miss at 0.4
 - [[2026-10-17-api-capacity-from-a-calibrated-copy]]: a calibrated copy found API CPU the wall; Argon2 at OWASP minimum, signed-out cache, keep-alive 65, max-requests 10000
+- [[2026-10-19-no-funded-wallet]]: the Money page shows money the partners hold; sums of rows, never a balance; "Heimly credit" for the voucher credit
+- [[2026-10-19-escrow-built-on-a-fake-provider-until-keys-arrive]]: a fake that signs real webhooks to our own endpoint; the Payscrow adapter is written but never selected without a key
+- [[2026-10-19-owner-accepts-before-the-payer-can-fund-escrow]]: a protected payment binds both sides, so the owner side accepts before funding
+- [[2026-10-19-agent-commission-comes-from-the-assignment-terms]]: the payer never decides the split; the assignment's percentage is the only source
+- [[2026-10-19-payout-accounts-are-owner-only-and-never-edited-in-place]]: invites only to the owner's registered contact, name matched to the owner, supersede not edit, 24h cooling off
+- [[2026-10-19-the-payments-kill-switch-ships-on]]: `payments_live` in the kill tuple, ON by migration, OFF stops new money movement only
+- [[2026-10-19-auto-renew-charges-the-saved-card-from-the-account-app]]: current plan price, retries +2 and +5 days, PAST_DUE then grace, no card means off in the UI
+- [[2026-10-19-side-effects-of-a-money-state-change-run-in-a-task-after-commit]]: the request returns at commit; notices, emails, chat lines and metrics run in a stamped task
+- [[2026-10-19-payments-live-on-one-branch-per-repo-until-dre-says-merge]]: BE #240 and FE #211 stay open and unmerged until Dre says; all payments work goes there
