@@ -70,3 +70,11 @@ session, append/update its record here in the same pass, and keep
 - [[2026-10-19-auto-renew-charges-the-saved-card-from-the-account-app]]: current plan price, retries +2 and +5 days, PAST_DUE then grace, no card means off in the UI
 - [[2026-10-19-side-effects-of-a-money-state-change-run-in-a-task-after-commit]]: the request returns at commit; notices, emails, chat lines and metrics run in a stamped task
 - [[2026-10-19-payments-live-on-one-branch-per-repo-until-dre-says-merge]]: BE #240 and FE #211 stay open and unmerged until Dre says; all payments work goes there
+- [[2026-11-01-sale-listings-carry-fees-but-no-caution]]: service charge, agency, legal and other fees on a sale (percent of the price); caution refused and dropped on a sale
+- [[2026-11-01-the-listing-in-progress-lives-on-the-server]]: one draft per person and account; one device writes, others follow silently; MQTT carries the version only
+- [[2026-11-02-publishing-takes-the-photos-from-the-draft]]: draft keeps the publish-grade WebP; Publish sends ids; locked and deleted in the listing's transaction, 409 on a second publish, upload fallback
+- [[2026-11-02-listing-photos-get-a-type-check-not-a-malware-scan]]: bytes must be JPEG, PNG or WebP under 20 MB; no ClamAV on listing photos (prod runs none); scanning belongs on files people open
+- [[2026-11-02-changes-to-a-listing-are-a-draft-until-update]]: a draft per listing, live only on Update property; baseline at first touch; assistant writes only differing values
+- [[2026-11-02-a-listing-only-takes-media-we-hold]]: `file_urls` and the batch signer removed; video confirm checks our storage and reads the real size; `organization` read-only
+- [[2026-11-02-drop-a-model-in-two-releases]]: state-only DeleteModel first (property 0086), drop the table in a later release; address verification and submit-for-verification dropped
+- [[2026-11-02-tests-never-change-real-storage]]: root conftest answers every boto write and delete; 11,003 test documents deleted from the shared bucket

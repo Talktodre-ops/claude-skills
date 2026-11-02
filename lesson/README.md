@@ -54,3 +54,12 @@ lesson here in the same session and add it to the index.
 - [[2026-10-19-an-idempotency-key-is-a-uuid-not-a-string]]: A derived key with a suffix is refused as invalid; the mock never checked
 - [[2026-10-19-a-build-must-survive-a-reboot]]: Commit in slices; after a reboot bring back postgres-test and resume builders from what is on disk
 - [[2026-10-19-a-scoped-upload-endpoint-cannot-serve-another-persona]]: Reuse the service, not the view; a tenant got 404 from the landlord-scoped upload
+- [[2026-11-01-the-api-client-already-adds-the-prefix]]: `api` paths start after `/api/v1`; a doubled prefix is a 404
+- [[2026-11-02-the-test-run-writes-to-the-shared-buckets]]: dev storage is the shared R2; tests left 11,003 documents and 20 images until a root guard
+- [[2026-11-02-a-scan-that-finds-nothing-needs-a-known-positive]]: two dead-code scans returned nothing because of path forms and ugrep flag order
+- [[2026-11-02-removing-code-by-pattern-cuts-the-wrong-boundary]]: a decorator left behind, a section comment taken, a method half cut; read every boundary
+- [[2026-11-02-a-failed-git-add-stages-nothing]]: one bad path and the chained commit pushed only a rename; read `git status` before committing
+- [[2026-11-02-a-client-number-is-not-a-fact]]: photo URLs, video URL and size, and a writable `organization`; check against what we hold
+- [[2026-11-02-the-browser-run-finds-what-unit-tests-miss]]: Edge found three assistant bugs the unit tests passed; feed tests the model's real reply shape
+- [[2026-11-02-a-reused-test-database-keeps-a-removed-table]]: after removing a model, `--create-db` once or transactional tests fail to truncate
+- [[2026-11-02-tidying-on-load-is-not-a-change]]: the wizard adjusts fields as it mounts; a draft's baseline is the first touch

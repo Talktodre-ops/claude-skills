@@ -86,6 +86,10 @@ you spawn: say this in its brief.
 - BE: pytest inside the container; org-isolation smoke suite lives in
   `smoke-test/`. Migration safety: `makemigrations --check`, and migrate against a
   scratch DB before trusting a migration.
+- Storage in tests (2026-11-02): in the api container the default storage is the
+  shared R2 bucket, not the local disk. The root `BE-heimly/conftest.py` answers
+  every boto write and delete in tests; keep it. After removing a model, run
+  `runtests.sh --create-db` once (the reused test DB keeps the old table).
 - The bar is the loop skill's: verify real behavior before commit, never commit
   red, never weaken a test to pass it.
 
@@ -113,14 +117,24 @@ flags delivered in the auth bootstrap payload, `useFlag()` on the FE. Flag creat
 in the feature's first PR, deleted in its last (after 100% + soak). Permanent flags
 are kill switches only (paystack, qoreid, email). While old and new paths coexist,
 migrations must be expand/contract. Plan/role gating stays in PlanLimitService and
-RoleGuard, never in flags.
+RoleGuard, never in flags. Flag rows live in the database Neon shares between
+local and pre-prod, so a flip reaches both; clear pre-prod's flag cache
+(`FeatureFlagService.invalidate_cache()` in `heimly-api`) or wait out the 5 minute
+TTL. On pre-prod since 2026-11-02: `wizard_v2` and `getting_started` on.
 
 ## Architecture facts that bite
 
 - Org scoping: active org comes ONLY from the `X-Organization-ID` header; never
   guess or infer it. Chats, listings, everything is strictly per-org.
 - Ownership chain: `Property.owner` = Organization; `Organization.owner` = User.
-- Two-phase property creation: metadata first (15s timeout), images in background.
+- Property creation (2026-11-02): the listing in progress is a server draft
+  (`ListingDraft`, one per person and account, one per person and listing for
+  edits); Publish sends `draft_photos` ids and the server moves them in, deleting
+  the draft in the same transaction. The old two-phase upload (metadata, then
+  images in the background) is the fallback when a photo is not on the server.
+  Edits go live only on Update property.
+- Never take a URL, size or owner from the request for something we store: a
+  listing only takes media we hold, and `organization` mirrors `owner` read-only.
 - Plan limits centralized in `account/services/plan_limits.py`; UNLIMITED = 999.
 - Auth is HTTPOnly-cookie based with refresh interceptors; forms must have
   `method="post"` (hydration-race credential leak guard).
