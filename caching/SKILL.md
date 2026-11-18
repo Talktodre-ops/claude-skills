@@ -126,5 +126,6 @@ Then:
 - `references/nextjs.md`: how Next 16 App Router writes `Cache-Control`, `expireTime`, `deploymentId`, the `_rsc` parameter, the router cache, and the code for the header rule, Docker build arg and recovery helpers.
 - `references/assets-and-cdn.md`: the asset archive (S3 behind CloudFront, or a host folder behind nginx), cache behaviours, the lifecycle trap, upload ordering, edge and browser headers, version routing.
 - `references/verification.md`: header checks per class, the deploy rehearsal in a real browser, and the testing traps.
+- `references/heimly-practices.md`: the worked example. Heimly's server data cache (Redis keys, TTLs, versioned keys, invalidation on write), render cache and on-demand refresh, TanStack Query choices, how MQTT seeds the cache, and the rules we hold.
 
 Related skill: `latency-tracing` for caching a hot server read without letting new data wait behind it.

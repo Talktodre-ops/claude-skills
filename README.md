@@ -305,6 +305,10 @@ and counting recoveries per release.
 - [`caching/references/verification.md`](caching/references/verification.md): header
   checks per class, the deploy rehearsal in a real browser, and the traps that hide
   the bug.
+- [`caching/references/heimly-practices.md`](caching/references/heimly-practices.md): the
+  worked example. Heimly's Redis data cache (keys, TTLs, versioned keys, invalidation),
+  render cache and on-demand refresh, TanStack Query choices, MQTT seeding, and the
+  rules we hold.
 
 ## Using a skill
 
