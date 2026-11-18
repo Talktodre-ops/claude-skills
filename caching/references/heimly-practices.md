@@ -16,14 +16,13 @@ render cache and the client data cache, and how real-time messages touch them.
 
 ### Configuration
 
-`BE-heimly/core/settings.py` (`CACHES`) defines three aliases on one Redis, each
-on its own database number:
+`BE-heimly/core/settings.py` (`CACHES`) defines two aliases on one Redis, each
+on its own database number (a third, `search`, was removed unused in BE #294):
 
 | Alias | Redis db | `KEY_PREFIX` | Default TTL | Used for |
 |---|---|---|---|---|
 | `default` | 0 | `heimly` | 3600 s | Almost everything. zlib compression, pool of 50 connections |
-| `hot` | 1 | `heimly:hot` | 900 s | Favourite sets only (`property/views/favourites.py`) |
-| `search` | 2 | `heimly:search` | 1800 s | Defined but no code reads it (see open questions) |
+| `hot` | 1 | `heimly:hot` | 900 s | Favourite sets only (`property/favourites_cache.py`), cleared after commit by signals on `Favourite` |
 
 `CACHE_TTL` in the same file holds named TTLs; `STATIC_DATA` is 86400 s and is
 used by the property type and electricity band lookups.
@@ -306,14 +305,14 @@ Summary only. Details and code are in `nextjs.md`, `assets-and-cdn.md` and
 15. Tests that touch cached data invalidate or isolate the cache first. Reason: the local test run shares the live Redis.
 16. Pages and navigation data are `no-store` to the browser; the server render cache does the saving. Reason: see `SKILL.md` section 2.
 
-## Open questions and inconsistencies
+## Open questions and what was fixed
 
-- The `search` cache alias (Redis db 2) is defined in `CACHES` and nothing reads it. Remove it or use it.
-- Favourites (`hot` cache) are written on toggle and never deleted. Anything that removes a favourite elsewhere (property delete, org change, admin) leaves up to 15 minutes of wrong state. The toggle also trusts the cached set over the table when deciding add or remove.
+- Resolved 18 Nov 2026 (BE #294): the unused `search` cache alias is removed.
+- Resolved 18 Nov 2026 (BE #294): `post_save`/`post_delete` on `Favourite` clear the person's cached list after commit (`property/favourites_cache.py`), and the toggle decides from the table. An organization deleted with `SET_NULL` moves rows by a bulk update that sends no signal; the 15 minute TTL covers that case.
 - Signed-out marketplace answers and reference lookups have no invalidation. A property unpublished by a moderator can still show to signed-out viewers for up to 30 s on the list; the detail cache is cleared by the view paths listed, not by every status change path. Check the admin and Celery paths.
-- `search/views/propert_type.py` prints `[CACHE SET]` to stdout on every miss.
+- Resolved 18 Nov 2026 (BE #294): the prints are gone, and the property-type key is a sha256 of the sorted query parameters. It used Python's `hash()`, which differs per process, so each worker kept its own copies.
 - `blog` is the only area `cache-refresh` knows. Pricing, help and the landing page wait for their 60 or 300 s timers.
-- `quick-edit-dialog.tsx` removes literal detail keys that sit outside `propertyKeys.one`. Whether a rent-ops edit leaves a stale property view is untested.
-- The repo has no Elasticsearch client or signal processor any more, yet the older notes describe both. The `on_commit` rule in section 2 still applies, but the search freshness story today (how listings reach search) should be written down by someone who owns it.
-- The `strict-no-store` rule and the build id are on `origin/pre-prod`. The `marketplace-fe` checkout at the repo root did not yet contain them when this was written, so the paths in section 6 were read from the `strict-no-store-fe` worktree.
-- A local `.env.local` in the web app holds a real-looking `REVALIDATE_SECRET`. Confirm it is a dev-only value and not the one in SSM.
+- Resolved 18 Nov 2026 (FE #277): the two dead literal keys are gone; `propertyKeys.one(uuid)` already removes every property query.
+- Answered: OpenSearch was removed on 8 Oct 2026 (BE #190). Search reads Postgres directly (`base/search.py`, DRF SearchFilter, `base/text_search.py`), so a listing is searchable the moment its row commits; there is no index to keep fresh. The caches in front of search are the sentence parse (`understand:v9:`, results not cached), the 30 s signed-out marketplace answers under the `public_cache` token, and the 24 h property-type list.
+- The `no-store` rule and the build id are on `origin/pre-prod` (FE #273 to #275); feature branches cut earlier pick them up on their next merge from pre-prod.
+- `.env.local` is git-ignored, so the local `REVALIDATE_SECRET` never leaves the machine; production reads its own from SSM.
