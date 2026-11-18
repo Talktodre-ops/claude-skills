@@ -63,3 +63,5 @@ lesson here in the same session and add it to the index.
 - [[2026-11-02-the-browser-run-finds-what-unit-tests-miss]]: Edge found three assistant bugs the unit tests passed; feed tests the model's real reply shape
 - [[2026-11-02-a-reused-test-database-keeps-a-removed-table]]: after removing a model, `--create-db` once or transactional tests fail to truncate
 - [[2026-11-02-tidying-on-load-is-not-a-change]]: the wizard adjusts fields as it mounts; a draft's baseline is the first touch
+- [[2026-11-18-the-browser-served-the-previous-builds-navigation-data]]: Next's year of stale-while-revalidate reached browsers with no CDN; Edge answered the first click after a deploy with the old build's data
+- [[2026-11-18-a-header-rule-replaces-the-frameworks-own-header]]: a `headers()` Cache-Control rule replaced Next's `no-store` on dynamic pages; diff every page class before and after

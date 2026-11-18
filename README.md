@@ -280,6 +280,32 @@ order, the non-negotiables, and the mistakes that bit.
 - [`payment-infrastructure/references/security-checklist.md`](payment-infrastructure/references/security-checklist.md):
   the threat table, the who-gains review, the launch gate, the operational flags.
 
+### caching
+
+How to cache a web app at every layer without ever serving the wrong version,
+distilled from a Next.js app whose browsers served the previous build's navigation
+data after every deploy (crashes and false 404s until a reload).
+
+The map of every cache in the request path (browser disk, back/forward, the
+framework's router cache, client data caches, CDN, server render and data caches),
+one Cache-Control rule per class of response, and the layered defences for deploys:
+browsers never store pages, a build id on everything, a safe switch-over point, an
+asset archive that outlives each deploy, recovery reloads, version routing at scale,
+and counting recoveries per release.
+
+- [`caching/SKILL.md`](caching/SKILL.md): the entry point. The cache map, the
+  response classes, the deploy defences, the decisions that come up, the
+  non-negotiables, and how to diagnose a stale-version bug.
+- [`caching/references/nextjs.md`](caching/references/nextjs.md): how Next.js App
+  Router writes Cache-Control, `expireTime`, `deploymentId`, the `_rsc` parameter,
+  the router cache, and the code for the header rule, build arg and recovery helpers.
+- [`caching/references/assets-and-cdn.md`](caching/references/assets-and-cdn.md):
+  the asset archive (S3 behind CloudFront, or a folder behind nginx), the lifecycle
+  trap, upload ordering, edge versus browser headers, version routing, pricing method.
+- [`caching/references/verification.md`](caching/references/verification.md): header
+  checks per class, the deploy rehearsal in a real browser, and the traps that hide
+  the bug.
+
 ## Using a skill
 
 Copy or symlink a skill directory into `~/.claude/skills/` (global) or a project's

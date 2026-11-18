@@ -78,3 +78,5 @@ session, append/update its record here in the same pass, and keep
 - [[2026-11-02-a-listing-only-takes-media-we-hold]]: `file_urls` and the batch signer removed; video confirm checks our storage and reads the real size; `organization` read-only
 - [[2026-11-02-drop-a-model-in-two-releases]]: state-only DeleteModel first (property 0086), drop the table in a later release; address verification and submit-for-verification dropped
 - [[2026-11-02-tests-never-change-real-storage]]: root conftest answers every boto write and delete; 11,003 test documents deleted from the shared bucket
+- [[2026-11-18-browsers-never-store-pages]]: pages and navigation data go to browsers as `no-store` via `headers()`; a deployment id per build (commit SHA); reload nets for code-load errors and click-reached 404s (FE #273-#275)
+- [[2026-11-18-cloudfront-stays-off-for-now]]: deferred by Dre; priced at about $0-1 a month today (inside the free tier); S3 asset archive and edge caching wait for an infra round
